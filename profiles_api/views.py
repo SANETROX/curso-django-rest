@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework import viewsets
 
 from profiles_api import serializers
+from profiles_api import models
 
 
 class HelloApi(APIView):
@@ -94,3 +95,11 @@ class HelloViewSet(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         """Destruye un objeto"""
         return Response({"message":"Destroy object successfully", "http_method":"DELETE"})
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """
+        Crear y actualizar perfiles, ModelViewset esta disenado para manejar por api los Modelos
+        que definamos
+    """
+    serializer_class = serializers.UserProfileSerializer
+    queryset = models.UserProfile.objects.all()
